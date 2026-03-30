@@ -1,0 +1,19 @@
+name = "capsulesync"
+compatibility_date = "2026-03-30"
+
+[vars]
+AUTH_SECRET = "change-me"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "capsulesync_db"
+database_id = ""
+
+[[kv_namespaces]]
+binding = "CONFIG"
+id = ""
+
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "capsulesync-assets"
+
