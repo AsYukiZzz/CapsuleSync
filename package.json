@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
+    "preview": "npx wrangler pages dev dist --compatibility-date=2024-03-20",
     "check": "tsc -b --noEmit",
     "test": "vitest run"
   },
