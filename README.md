@@ -149,20 +149,24 @@ AUTH_SECRET="local-dev-secret-key-change-me"
 
 3. 部署完成后，在 Cloudflare 控制台的 Pages 项目设置中，确保已正确绑定 D1 (`DB`)、KV (`CONFIG`) 和 R2 (`BUCKET`)。
 
-### 方式二：通过 GitHub 持续集成部署
+### 方式二：通过 GitHub 持续集成部署 (网页端配置)
 
 1. 将代码推送到 GitHub 仓库。
-2. 在 Cloudflare 控制台 -> Pages -> Connect to Git。
-3. 选择该仓库，构建设置如下：
-   - **Framework preset**: `None`
-   - **Build command**: `npm run build`
-   - **Build output directory**: `dist`
-4. 在 **Environment variables** 中添加 `AUTH_SECRET`。
-5. 在 **Functions -> Bindings** 中，手动添加：
-   - D1 绑定：名称 `DB`，选择 `capsulesync_db`
-   - KV 绑定：名称 `CONFIG`，选择 `capsulesync_config`
-   - R2 绑定：名称 `BUCKET`，选择 `capsulesync-assets`
-6. 保存并部署。
+2. 在 Cloudflare 控制台 -> **Workers 和 Pages** -> **创建** -> **Pages** -> **连接到 Git**。
+3. 选择该项目的 GitHub 仓库，在“设置构建和部署”页面中，按如下方式填写截图中的内容：
+   - **框架预设 (Framework preset)**: `Vite` (或选择 `无` 均可)
+   - **构建命令 (Build command)**: `npm run build`
+   - **构建输出目录 (Build output directory)**: `dist`
+   - **根目录 (Root directory)**: 留空 (默认 `/`)
+4. 展开 **环境变量 (高级)**，点击“添加变量”：
+   - 变量名称: `AUTH_SECRET`
+   - 值: `你的随机超长安全密钥` (保存后会加密)
+5. 点击 **保存并部署**。(此时第一次部署可能会因为缺少绑定而失败，这属于正常现象)
+6. 部署完成后，进入该 Pages 项目的详情页，点击 **设置 (Settings)** -> **函数 (Functions)** -> 向下滚动找到 **绑定 (Bindings)**，手动添加以下三个绑定：
+   - **D1 数据库绑定**: 变量名称填 `DB`，选择你创建的 `capsulesync_db`
+   - **KV 命名空间绑定**: 变量名称填 `CONFIG`，选择你创建的 `capsulesync_config`
+   - **R2 存储桶绑定**: 变量名称填 `BUCKET`，选择你创建的 `capsulesync-assets`
+7. 绑定完成后，回到 **部署 (Deployments)** 页面，点击 **重试部署 (Retry deployment)**，新的部署将会成功生效。
 
 ---
 

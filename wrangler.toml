@@ -7,11 +7,11 @@ AUTH_SECRET = "change-me"
 [[d1_databases]]
 binding = "DB"
 database_name = "capsulesync_db"
-database_id = ""
+database_id = "1237893c-4f00-454b-93e9-fa03e00c53ba"
 
 [[kv_namespaces]]
 binding = "CONFIG"
-id = ""
+id = "99ccbdce75e34cdca800cc7c32281c1e"
 
 [[r2_buckets]]
 binding = "BUCKET"
